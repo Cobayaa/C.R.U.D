@@ -1,0 +1,41 @@
+{% extends "base.html"%}
+
+{% block titulo%}
+    Editar Productos
+{% endblock %}
+
+
+{% block contenido%}
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{message}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+    <style>
+        .content{
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 200px;
+        }
+        .bu{
+            position: relative;
+            padding: 5px 15px;
+            color: white;
+            background: #181818;
+            border: none;
+        }
+    </style>
+
+    <form class="content" action="/actualizar/{{productos.0}}" method="POST">
+        <h1>Editar Productos</h1>
+        <input type="text" placeholder="producto" name="nombre" value="{{productos.1}}">
+        <input type="text" placeholder="precio" name="precio" value="{{productos.2}}">
+        <button class="bu">guardar</button>
+    </form>
+{% endblock %}

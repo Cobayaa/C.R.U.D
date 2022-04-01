@@ -1,0 +1,82 @@
+{% extends "base.html"%}
+
+{% block titulo%}
+    Agregar Productos
+{% endblock %}
+
+
+{% block contenido%}
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{message}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<h1>Inventario de Productos</h1>
+<form class="agregar" action="/agregar" method="POST">
+    <input class="" type="text" placeholder="producto" name="nombre" value="{{nombre}}">
+    <input type="number" placeholder="precio" name="precio" value="{{precio}}">
+    <button class="btn btn-dark" class="submit">guardar</button>
+</form>
+
+<style>
+    h1{
+        position: relative;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .agregar{
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+    .editar{
+        position: relative;
+        text-decoration: none;
+        color:  black;
+        padding: 5px 15px;
+        background: #FFF87F;
+    }
+    .eliminar:hover{
+        color: black;
+    }
+    .editar:hover{
+        color: white;
+    }
+    .eliminar{
+        position: relative;
+        text-decoration: none;
+        color: white;
+        padding: 5px 15px;
+        background: #FF637D;
+    }
+</style>
+
+<table class="table table-hover table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Producto</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for producto in productos %}
+        <tr>
+            <td>{{producto.1}}</td>
+            <td>{{producto.2}}</td>
+            <td>
+                <a class="editar" href="/editar/{{producto.0}}">editar</a>
+                <a class="eliminar" href="/eliminar/{{producto.0}}">eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
